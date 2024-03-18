@@ -117,6 +117,59 @@ expressions.filters.convertDateES = function(input, s) {
 }
 
 
+expressions.filters.getInfoSeverity = function(input, s) {
+	return input;
+}
+
+expressions.filters.getOwaspShortCode = function(input, s) {
+
+}
+
+expressions.filters.formatDateLong = function(input, s) {
+
+	if (!input) {
+        return input;
+    }
+
+
+	// Split the input date string into year, month, and day
+  	const [year, month, day] = input.split('-');
+
+  	// Create a Date object with the input date
+  	const date = new Date(year, month - 1, day);
+
+  	// Define arrays for month names and suffixes for day
+  	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  	const daySuffixes = ['st', 'nd', 'rd', 'th'];
+
+  	// Get the day of the month
+  	const dayOfMonth = parseInt(day);
+
+  	// Determine the suffix for the day
+  	let suffix;
+  	if (dayOfMonth >= 11 && dayOfMonth <= 13) {
+    		suffix = 'th';
+  	} else {
+    		suffix = daySuffixes[(dayOfMonth - 1) % 10] || 'th';
+  	}
+
+	// Remove leading zero if present
+  	const formattedDay = day.replace(/^0+/, '')
+	
+  	// Format the output string
+  	const formattedDate = `${formattedDay}${suffix} ${monthNames[date.getMonth()]} ${year}`;
+
+  	return formattedDate;
+}
+
+expressions.filters.getFacetCount = function(input, s) {
+	return input;
+}
+
+expressions.filters.makeUnique = function(input, s) {
+
+	return input;
+}
 
 exports.expressions = expressions
 
